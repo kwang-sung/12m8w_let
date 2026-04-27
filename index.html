@@ -4,391 +4,336 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>쿠대 8주 하이브리드 전략 라이브 가이드</title>
-<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
+  :root {
+    --org: #E85D1A;
+    --org2: #FF7A38;
+    --org-pale: #FFF3EC;
+    --gold: #C98F1A;
+    --gold2: #F5BE4A;
+    --gold-pale: #FFFBEF;
+    --teal: #0F7A6E;
+    --teal2: #15A898;
+    --navy: #1C2645;
+    --bg: #F4F5F9;
+    --white: #FFFFFF;
+    --text: #1C2645;
+    --muted: #8A91AA;
+    --line: #E8EAF0;
+    --font: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
 
-body {
-  background: #ffffff;
-  color: #1a1a2e;
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 15px;
-  line-height: 1.75;
-}
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
 
-/* ── NAV ── */
-nav {
-  background: #0f172a;
-  padding: 0 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 54px;
-  position: sticky; top:0; z-index:100;
-}
-.nav-logo { display: none; }
-.nav-links { display:flex; gap:6px; list-style:none; }
-.nav-links a {
-  color: rgba(255,255,255,0.65);
-  text-decoration: none;
-  font-size: 13px; font-weight: 600;
-  padding: 7px 18px;
-  border-radius: 6px;
-  transition: all 0.2s;
-}
-.nav-links a:hover { color: #fff; background: rgba(255,255,255,0.08); }
+  /* ────────── HERO ────────── */
+  .hero {
+    background: linear-gradient(160deg, #141C35 0%, #1E2D50 50%, #162038 100%);
+    padding: 56px 28px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--org), var(--gold2), var(--teal2));
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 380px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(255,122,56,.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
 
-/* ── HERO ── */
-.hero {
-  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #0f2d4a 100%);
-  padding: 64px 24px 56px;
-  text-align: center;
-  position: relative; overflow: hidden;
-}
-.hero::after {
-  content: '';
-  position: absolute; bottom:0; left:0; right:0; height:3px;
-  background: linear-gradient(90deg, #f97316, #fbbf24, #3b82f6);
-}
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(251,191,36,0.15);
-  border: 1px solid rgba(251,191,36,0.4);
-  color: #fbbf24;
-  font-size: 11px; font-weight: 700;
-  letter-spacing: 2px; text-transform: uppercase;
-  padding: 6px 18px; border-radius: 20px;
-  margin-bottom: 22px;
-}
-.hero h1 {
-  font-family: 'Pretendard', -apple-system, sans-serif;
-  font-size: clamp(22px, 5vw, 36px);
-  font-weight: 900; color: #fff;
-  line-height: 1.45; margin-bottom: 14px;
-}
-.hero h1 .acc { color: #f97316; }
-.hero h1 .acc2 { color: #fbbf24; }
-.hero-desc {
-  color: rgba(255,255,255,0.6);
-  font-size: 14px; line-height: 1.9;
-  max-width: 480px; margin: 0 auto 30px;
-}
-.hero-desc strong { color: rgba(255,255,255,0.9); }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,122,56,.12); border: 1px solid rgba(255,122,56,.3);
+    color: #FFAA7A; font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    padding: 5px 15px; border-radius: 20px; margin-bottom: 24px;
+    text-transform: uppercase;
+  }
 
-.stat-row {
-  display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
-  margin-bottom: 28px;
-}
-.stat-pill {
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 50px; padding: 10px 20px; text-align: center;
-}
-.stat-pill .v { font-size: 19px; font-weight: 900; color: #fff; display:block; line-height:1.2; }
-.stat-pill .l { font-size: 11px; color: rgba(255,255,255,0.45); }
+  .hero h1 {
+    font-size: 30px; font-weight: 800; color: #fff;
+    line-height: 1.5; margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+  .hero h1 .acc  { color: #FFAA7A; }
+  .hero h1 .acc2 { color: var(--gold2); }
 
-.promise {
-  max-width: 500px; margin: 0 auto;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.14);
-  border-radius: 12px; padding: 16px 22px;
-  font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.85;
-}
-.promise strong { color: #f97316; }
+  .hero-desc {
+    color: rgba(255,255,255,.55); font-size: 14px;
+    max-width: 420px; margin: 0 auto 32px;
+    line-height: 1.85; font-weight: 400;
+  }
+  .hero-desc strong { color: rgba(255,255,255,.88); font-weight: 600; }
 
-/* ── SCHED BAR ── */
-.sched-bar {
-  background: #f97316;
-  padding: 12px 24px;
-  display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
-}
-.sched-item {
-  display: flex; align-items: center; gap: 6px;
-  color: #fff; font-size: 13px; font-weight: 500;
-}
-.sched-item strong { font-weight: 800; }
+  /* stat pills */
+  .stat-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+  .stat-pill {
+    background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);
+    border-radius: 50px; padding: 9px 20px; text-align: center;
+    backdrop-filter: blur(4px);
+  }
+  .stat-pill .v { font-size: 18px; font-weight: 800; color: #fff; display: block; line-height: 1.2; }
+  .stat-pill .l { font-size: 10.5px; color: rgba(255,255,255,.45); letter-spacing: .3px; margin-top: 2px; }
 
-/* ── MAIN WRAP ── */
-.wrap { max-width: 860px; margin: 0 auto; padding: 48px 20px 80px; }
+  /* promise box */
+  .promise {
+    max-width: 480px; margin: 0 auto;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 12px; padding: 16px 22px;
+    font-size: 13px; color: rgba(255,255,255,.65);
+    line-height: 1.85;
+  }
+  .promise strong { color: #FFAA7A; font-weight: 600; }
 
-/* ── PHASE ── */
-.phase {
-  margin-bottom: 28px;
-  border-radius: 14px; overflow: hidden;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  background: #fff;
-}
+  /* ────────── SCHED BAR ────────── */
+  .sched-bar {
+    background: var(--org);
+    padding: 11px 24px;
+    display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+  }
+  .sched-item {
+    display: flex; align-items: center; gap: 5px;
+    color: #fff; font-size: 12px; font-weight: 500;
+  }
+  .sched-item strong { font-weight: 700; }
 
-.phase-head {
-  display: flex; align-items: center; gap: 14px;
-  padding: 16px 22px;
-  border-bottom: 1px solid #e5e7eb;
-}
-.ph1-head { background: #fff7ed; }
-.ph2-head { background: #fffbeb; }
-.ph3-head { background: #f0fdf4; }
-.ph4-head { background: #eff6ff; }
+  /* ────────── CONTAINER ────────── */
+  .wrap { max-width: 860px; margin: 0 auto; padding: 36px 16px 64px; }
 
-.ph-icon {
-  width: 42px; height: 42px; border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Pretendard', -apple-system, sans-serif;
-  font-size: 17px; font-weight: 900; color: #fff; flex-shrink: 0;
-}
-.ic1 { background: #f97316; }
-.ic2 { background: #d97706; }
-.ic3 { background: #16a34a; }
-.ic4 { background: #2563eb; }
+  /* ────────── PHASE BLOCK ────────── */
+  .phase {
+    margin-bottom: 20px;
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,.06);
+    border: 1px solid var(--line);
+    background: var(--white);
+  }
 
-.ph-meta { flex: 1; }
-.ph-sub {
-  font-size: 10px; font-weight: 700;
-  letter-spacing: 1.5px; text-transform: uppercase;
-  color: #9ca3af; margin-bottom: 2px;
-}
-.ph-title {
-  font-family: 'Pretendard', -apple-system, sans-serif;
-  font-size: 15px; font-weight: 900; color: #1a1a2e;
-}
+  .phase-head {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .ph1-head { background: linear-gradient(90deg, #FFF3EC, #fff); }
+  .ph2-head { background: linear-gradient(90deg, #FFFBEF, #fff); }
+  .ph3-head { background: linear-gradient(90deg, #EDF9F7, #fff); }
+  .ph4-head { background: linear-gradient(90deg, #EEF0FA, #fff); }
 
-.ph-wk {
-  font-size: 11px; font-weight: 700;
-  color: #fff; padding: 5px 13px;
-  border-radius: 20px; white-space: nowrap;
-}
-.wk1 { background: #f97316; }
-.wk2 { background: #d97706; }
-.wk3 { background: #16a34a; }
-.wk4 { background: #2563eb; }
+  .ph-icon {
+    width: 42px; height: 42px; border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; font-weight: 900; color: #fff; flex-shrink: 0;
+  }
+  .ic1 { background: linear-gradient(135deg, #E85D1A, #FF8C52); }
+  .ic2 { background: linear-gradient(135deg, #C98F1A, #F5BE4A); }
+  .ic3 { background: linear-gradient(135deg, #0F7A6E, #15A898); }
+  .ic4 { background: linear-gradient(135deg, #1C2645, #3A4D80); }
 
-/* ── WEEK CARD ── */
-.wk-card {
-  padding: 26px 26px 22px;
-  border-bottom: 1px solid #f3f4f6;
-}
-.wk-card:last-child { border-bottom: none; }
+  .ph-meta { flex: 1; min-width: 0; }
+  .ph-sub {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 2px;
+  }
+  .ph-title { font-size: 15.5px; font-weight: 800; color: var(--navy); }
 
-.wk-date {
-  font-size: 11px; font-weight: 700;
-  letter-spacing: 1.2px; text-transform: uppercase;
-  color: #9ca3af; margin-bottom: 10px;
-}
+  .ph-wk {
+    font-size: 11px; font-weight: 700; color: #fff;
+    padding: 5px 13px; border-radius: 20px; white-space: nowrap;
+  }
+  .wk1 { background: var(--org); }
+  .wk2 { background: var(--gold); }
+  .wk3 { background: var(--teal); }
+  .wk4 { background: var(--navy); }
 
-.wk-title {
-  font-family: 'Pretendard', -apple-system, sans-serif;
-  font-size: 17px; font-weight: 900;
-  color: #111827; line-height: 1.55; margin-bottom: 16px;
-}
-.wk-title .hl { color: #f97316; }
-.wk-title .gl { color: #d97706; }
-.wk-title .tl { color: #16a34a; }
+  /* week grid */
+  .wk-grid { display: grid; grid-template-columns: 1fr 1fr; }
 
-/* topic list */
-.tlist { list-style: none; }
-.tlist li {
-  font-size: 14px; color: #374151;
-  padding: 10px 0 10px 18px;
-  position: relative;
-  border-bottom: 1px solid #f3f4f6;
-  line-height: 1.65;
-}
-.tlist li:last-child { border-bottom: none; }
-.tlist li::before {
-  content: '▸'; position: absolute; left: 0; top: 11px;
-  font-size: 9px; color: #f97316;
-}
+  .wk-card {
+    padding: 24px 22px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .wk-card:nth-child(odd) { border-right: 1px solid var(--line); }
+  .wk-card:nth-last-child(-n+2) { border-bottom: none; }
 
-/* ── 잠금 박스 (리스트와 완전 분리) ── */
-.lock-box {
-  margin-top: 12px;
-  background: #f8f9fc;
-  border: 1px dashed #d1d5e8;
-  border-radius: 10px;
-  padding: 14px 18px;
-}
-.lock-box-title {
-  display: flex; align-items: center; gap: 7px;
-  font-size: 12px; font-weight: 700;
-  color: #9ca3af; margin-bottom: 10px;
-  letter-spacing: 0.3px;
-}
-.lock-row {
-  display: flex; align-items: center;
-  gap: 10px; padding: 7px 0;
-  border-bottom: 1px solid #edf0f8;
-}
-.lock-row:last-child { border-bottom: none; }
-.lock-num {
-  width: 22px; height: 22px;
-  background: #e8ebf5;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 700; color: #9ca3af;
-  flex-shrink: 0;
-}
-.lock-text {
-  flex: 1;
-  font-size: 13px; color: #b0b7ca;
-  font-style: italic;
-}
+  .wk-date {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
+  }
 
-/* tags */
-.tag {
-  display: inline-block;
-  font-size: 10px; font-weight: 700;
-  padding: 2px 8px; border-radius: 4px;
-  margin-left: 6px; vertical-align: middle;
-}
-.t-hot { background: #fff7ed; color: #f97316; border: 1px solid #fed7aa; }
-.t-key { background: #fffbeb; color: #d97706; border: 1px solid #fde68a; }
-.t-new { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
-.t-lock { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+  .wk-title {
+    font-size: 15px; font-weight: 800; color: var(--navy);
+    line-height: 1.6; margin-bottom: 16px;
+    letter-spacing: -0.2px;
+  }
+  .wk-title .hl  { color: var(--org); }
+  .wk-title .gl  { color: var(--gold); }
+  .wk-title .tl  { color: var(--teal); }
 
-/* teaser */
-.wk-teaser {
-  margin-top: 14px;
-  background: #fff7ed;
-  border-left: 3px solid #f97316;
-  padding: 9px 14px; border-radius: 0 6px 6px 0;
-  font-size: 13px; color: #9a3412; font-style: italic; line-height: 1.65;
-}
+  /* footer teaser */
+  .wk-teaser {
+    background: var(--org-pale);
+    border-left: 3px solid var(--org);
+    padding: 9px 13px; border-radius: 0 6px 6px 0;
+    font-size: 12.5px; color: #7A3A20;
+    font-weight: 500; line-height: 1.6;
+  }
 
-/* phase goal */
-.ph-goal {
-  background: #0f172a;
-  padding: 13px 22px;
-  display: flex; align-items: flex-start; gap: 10px;
-  font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.65;
-}
-.ph-goal strong { color: #fbbf24; }
-.ph-goal span { font-size: 17px; flex-shrink: 0; margin-top: 1px; }
+  /* phase goal bar */
+  .ph-goal {
+    background: var(--navy);
+    padding: 13px 22px;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; color: rgba(255,255,255,.6);
+    font-weight: 400;
+  }
+  .ph-goal strong { color: var(--gold2); font-weight: 700; }
+  .ph-goal span { font-size: 18px; flex-shrink: 0; }
 
-/* ── DIVIDER ── */
-.div {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
-  margin: 32px 0;
-}
+  /* ────────── DIVIDER ────────── */
+  .div {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line), transparent);
+    margin: 28px 0;
+  }
 
-/* ── CTA ── */
-.cta {
-  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
-  border-radius: 16px; padding: 44px 28px;
-  text-align: center; position: relative; overflow: hidden;
-}
-.cta::before {
-  content: ''; position: absolute;
-  top: -60px; right: -60px; width: 300px; height: 300px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(249,115,22,0.1) 0%, transparent 70%);
-  pointer-events: none;
-}
-.cta h2 {
-  font-family: 'Pretendard', -apple-system, sans-serif;
-  font-size: clamp(18px, 3.5vw, 26px);
-  font-weight: 900; color: #fff;
-  line-height: 1.55; margin-bottom: 14px;
-}
-.cta h2 em { font-style: normal; color: #f97316; }
-.cta p {
-  color: rgba(255,255,255,0.6);
-  font-size: 13.5px; line-height: 1.85; margin-bottom: 24px;
-}
-.cta p strong { color: #fff; }
+  /* ────────── BOTTOM CTA ────────── */
+  .cta {
+    background: linear-gradient(145deg, #141C35, #1E2D50);
+    border-radius: 16px; padding: 44px 28px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .cta::before {
+    content: ''; position: absolute; top: -60px; right: -60px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,93,26,.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta h2 {
+    font-size: 22px; font-weight: 800; color: #fff;
+    line-height: 1.55; margin-bottom: 14px;
+    letter-spacing: -0.3px;
+  }
+  .cta h2 em { color: #FFAA7A; font-style: normal; }
+  .cta p {
+    color: rgba(255,255,255,.55); font-size: 13.5px;
+    margin-bottom: 28px; line-height: 1.95; font-weight: 400;
+  }
+  .cta p strong { color: rgba(255,255,255,.88); font-weight: 600; }
 
-.cta-chips {
-  display: flex; justify-content: center;
-  gap: 8px; flex-wrap: wrap; margin-bottom: 18px;
-}
-.cta-chip {
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
-  color: rgba(255,255,255,0.85);
-  border-radius: 20px; padding: 7px 16px;
-  font-size: 12px; font-weight: 600;
-}
+  .cta-chips { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+  .cta-chip {
+    background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.13);
+    color: rgba(255,255,255,.75); font-size: 12px; font-weight: 500;
+    padding: 7px 16px; border-radius: 50px;
+  }
 
-.cta-box {
-  max-width: 480px; margin: 0 auto;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 10px; padding: 14px 18px;
-  font-size: 12.5px; color: rgba(255,255,255,0.6); line-height: 1.75;
-}
-.cta-box strong { color: #f97316; }
+  .cta-box {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(232,93,26,.18), rgba(201,143,26,.12));
+    border: 1px solid rgba(232,93,26,.3);
+    border-radius: 10px; padding: 14px 22px;
+    color: rgba(255,255,255,.7); font-size: 13px; line-height: 1.75;
+    font-weight: 400;
+  }
+  .cta-box strong { color: #FFAA7A; font-weight: 600; }
 
-/* ── FOOTER ── */
-.footer {
-  background: #0f172a;
-  padding: 18px 24px; text-align: center;
-  font-size: 12px; color: rgba(255,255,255,0.3);
-}
-.footer em { color: rgba(255,255,255,0.55); font-style: normal; font-weight: 700; }
+  /* ────────── FOOTER ────────── */
+  .footer {
+    background: var(--navy); text-align: center;
+    padding: 20px 16px; font-size: 11px;
+    color: rgba(255,255,255,.22); letter-spacing: .8px;
+    font-weight: 400;
+  }
+  .footer em { color: var(--org2); font-style: normal; }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 640px) {
-  nav { padding: 0 16px; }
-  .nav-links { display: none; }
-  .wk-card { padding: 20px 16px 16px; }
-  .phase-head { padding: 14px 16px; gap: 10px; }
-  .wk-title { font-size: 15px; }
-  .stat-row { gap: 8px; }
-  .sched-bar { gap: 12px; padding: 12px 16px; }
-  .cta { padding: 32px 16px; }
-  .wrap { padding: 36px 16px 60px; }
-}
+  /* ────────── MOBILE ────────── */
+  @media (max-width: 640px) {
+    .hero { padding: 48px 20px 40px; }
+    .hero h1 { font-size: 24px; }
+    .hero-desc { font-size: 13.5px; }
+
+    .sched-bar { gap: 12px; padding: 10px 16px; }
+    .sched-item { font-size: 11.5px; }
+
+    .wrap { padding: 24px 12px 56px; }
+
+    .wk-grid { grid-template-columns: 1fr; }
+    .wk-card:nth-child(odd) { border-right: none; }
+    .wk-card:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
+    .wk-card:last-child { border-bottom: none; }
+    .wk-card { padding: 20px 18px; }
+    .wk-title { font-size: 14.5px; }
+
+    .phase-head { padding: 14px 16px; gap: 11px; }
+    .ph-title { font-size: 14.5px; }
+
+    .ph-goal { padding: 11px 16px; font-size: 12.5px; }
+
+    .cta { padding: 32px 18px; }
+    .cta h2 { font-size: 19px; }
+    .cta p { font-size: 13px; }
+
+    .stat-row { gap: 6px; }
+    .stat-pill { padding: 8px 16px; }
+    .stat-pill .v { font-size: 16px; }
+  }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <ul class="nav-links">
-    <li><a href="#phase1">1~2주차</a></li>
-    <li><a href="#phase2">3~4주차</a></li>
-    <li><a href="#phase3">5~6주차</a></li>
-    <li><a href="#phase4">7~8주차</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
+<!-- ─── HERO ─── -->
 <div class="hero">
-  <div class="hero-badge">🏆 12개월 결제자 전용 특전</div>
-  <h1>
-    월 매출 <span class="acc">3천</span> 달성을 위한<br>
-    <span class="acc2">'하이브리드 전략'</span> 8주 라이브 가이드
-  </h1>
+  <div class="hero-badge">🔒 12개월 결제자 전용 · 비공개 라이브 특전</div>
+  <h1>국내 리셀과 해외 소싱,<br><span class="acc">두 개를 하나로 합치면</span><br><span class="acc2">매출이 달라집니다</span></h1>
   <p class="hero-desc">
-    "단순한 프로그램 이용을 넘어,<br>
-    실제 매출 <strong>3,000만 원 달성</strong>을 위해<br>
-    쿠대 마스터가 직접 가이드합니다."
+    아무도 공개하지 않는 <strong>하이브리드 전략</strong> —<br>
+    마스터가 직접 쓰는 소싱 루트부터 매출 구조 설계까지<br>
+    8주 동안 그대로 공개합니다.
   </p>
+
   <div class="stat-row">
     <div class="stat-pill"><span class="v">8주</span><span class="l">집중 라이브</span></div>
-    <div class="stat-pill"><span class="v">120분</span><span class="l">매주 1회</span></div>
+    <div class="stat-pill"><span class="v">토 9시</span><span class="l">매주 120분</span></div>
+    <div class="stat-pill"><span class="v">5/9</span><span class="l">개강</span></div>
     <div class="stat-pill"><span class="v">1부+2부</span><span class="l">이론+실습</span></div>
   </div>
+
   <div class="promise">
     🔥 이 커리큘럼은 <strong>4월 12개월 장기 결제자 전원</strong>에게 약속된 특전입니다.<br>
     제목만 봐도 "이건 안 들으면 손해다" 싶을 겁니다.
   </div>
 </div>
 
-<!-- SCHED BAR -->
+<!-- ─── SCHED BAR ─── -->
 <div class="sched-bar">
   <div class="sched-item">📅 <strong>5월 9일 개강</strong></div>
   <div class="sched-item">🗓 <strong>매주 토요일 09:00~11:00</strong></div>
   <div class="sched-item">1부 <strong>전략 강의 60분</strong></div>
-  <div class="sched-item">2부 <strong>실습 & Q&A 60분</strong></div>
-  <div class="sched-item">📹 <strong>라이브 후 2주 다시보기 제공</strong></div>
+  <div class="sched-item">2부 <strong>실습 &amp; Q&amp;A 60분</strong></div>
+  <div class="sched-item">📹 <strong>녹화본 한달 시청 제공</strong></div>
 </div>
 
-<!-- MAIN -->
+<!-- ─── MAIN ─── -->
 <div class="wrap">
 
-  <!-- PHASE 1 -->
-  <div class="phase" id="phase1">
+  <!-- ══ PHASE 1 ══ -->
+  <div class="phase">
     <div class="phase-head ph1-head">
       <div class="ph-icon ic1">1</div>
       <div class="ph-meta">
@@ -398,76 +343,34 @@ nav {
       <div class="ph-wk wk1">1~2주차</div>
     </div>
 
-    <div class="wk-card">
-      <div class="wk-date">Week 1 · 5월 9일 (토)</div>
-      <div class="wk-title">
-        지금 올리면 팔리는 상품 vs<br>
-        <span class="hl">올려도 절대 안 팔리는 상품</span> —<br>
-        그 차이를 아는 사람만 첫 주문이 납니다
-      </div>
-      <ul class="tlist">
-        <li>① 쿠대 — 첫날부터 매출 구조가 돌아가게 하는 세팅법<span class="tag t-hot">실습</span></li>
-      </ul>
-    <div class="lock-box">
-      <div class="lock-box-title"><span>🔒</span> 나머지 세부 내용은 12개월 결제자에게만 공개됩니다</div>
-      <div class="lock-row">
-        <div class="lock-num">②</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-key">핵심</span>
-      </div>
-      <div class="lock-row">
-        <div class="lock-num">③</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-hot">독점</span>
-      </div>
-      <div class="lock-row">
-        <div class="lock-num">④</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-new">최초공개</span>
-      </div>
-    </div>
-      <div class="wk-teaser">💬 "왜 열심히 올리는데 안 팔리나" — 이 질문의 답, 1주차에 드립니다.</div>
-    </div>
+    <div class="wk-grid">
 
-    <div class="wk-card">
-      <div class="wk-date">Week 2 · 5월 16일 (토)</div>
-      <div class="wk-title">
-        남들이 올리기 전에<br>
-        <span class="hl">내가 먼저 상위에 꽂아놓는 법</span> —<br>
-        선점 전략 공개
+      <div class="wk-card">
+        <div class="wk-date">Week 1 · 5월 9일 (토)</div>
+        <div class="wk-title">
+          지금 올리면 팔리는 상품 vs<br>
+          <span class="hl">올려도 절대 안 팔리는 상품</span> —<br>
+          그 차이를 아는 사람만 첫 주문이 납니다
+        </div>
+        <div class="wk-teaser">💬 "왜 열심히 올리는데 안 팔리나" — 이 질문의 답, 1주차에 드립니다.</div>
       </div>
-      <ul class="tlist">
-        <li>① 남들 다 올리는 카테고리, 지금 들어가면 늦습니다 — 블루오션 찾는 법<span class="tag t-key">독점</span></li>
-      </ul>
-    <div class="lock-box">
-      <div class="lock-box-title"><span>🔒</span> 나머지 세부 내용은 12개월 결제자에게만 공개됩니다</div>
-      <div class="lock-row">
-        <div class="lock-num">②</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-hot">실전</span>
-      </div>
-      <div class="lock-row">
-        <div class="lock-num">③</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-hot">핵심</span>
-      </div>
-      <div class="lock-row">
-        <div class="lock-num">④</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-new">실습</span>
-      </div>
-    </div>
-      <div class="wk-teaser">💬 소싱처 고민, 이번 주 이후엔 안 하게 됩니다.</div>
-    </div>
 
-    <div class="ph-goal">
-      <span>🎯</span>
-      <div><strong>Phase 1 목표:</strong> 리셀 엔진 ON — 첫 주문 발생 & 나만의 주력 카테고리 확정</div>
+      <div class="wk-card">
+        <div class="wk-date">Week 2 · 5월 16일 (토)</div>
+        <div class="wk-title">
+          고객이 검색하기 전에<br>
+          <span class="hl">내가 먼저 꽂혀 있는 법</span> —<br>
+          첫 주문을 만드는 소싱 공식
+        </div>
+        <div class="wk-teaser">💬 소싱처 고민, 이번 주 이후엔 안 하게 됩니다.</div>
+      </div>
+
     </div>
+    <div class="ph-goal"><span>🎯</span><div><strong>Phase 1 목표:</strong> 리셀 엔진 ON — 첫 주문 발생 &amp; 나만의 주력 카테고리 확정</div></div>
   </div>
 
-  <!-- PHASE 2 -->
-  <div class="phase" id="phase2">
+  <!-- ══ PHASE 2 ══ -->
+  <div class="phase">
     <div class="phase-head ph2-head">
       <div class="ph-icon ic2">2</div>
       <div class="ph-meta">
@@ -477,155 +380,71 @@ nav {
       <div class="ph-wk wk2">3~4주차</div>
     </div>
 
-    <div class="wk-card">
-      <div class="wk-date">Week 3 · 5월 23일 (토)</div>
-      <div class="wk-title">
-        국내 리셀만 하면<br>
-        <span class="gl">마진 한계가 온다</span> —<br>
-        해외 소싱으로 30% 마진 만드는 법
-      </div>
-      <ul class="tlist">
-        <li>① 마진이 나오는 카테고리에는 공통점이 있다 — 그 공통점 공개<span class="tag t-hot">독점</span></li>
-      </ul>
-    <div class="lock-box">
-      <div class="lock-box-title"><span>🔒</span> 나머지 세부 내용은 12개월 결제자에게만 공개됩니다</div>
-      <div class="lock-row">
-        <div class="lock-num">②</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-key">핵심</span>
-      </div>
-      <div class="lock-row">
-        <div class="lock-num">③</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-new">최초공개</span>
-      </div>
-      <div class="lock-row">
-        <div class="lock-num">④</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-hot">실전</span>
-      </div>
-    </div>
-      <div class="wk-teaser">💬 해외 소싱 어렵다고 피하던 분들이 가장 많이 돈 법니다.</div>
-    </div>
+    <div class="wk-grid">
 
-    <div class="wk-card">
-      <div class="wk-date">Week 4 · 5월 30일 (토)</div>
-      <div class="wk-title">
-        중국 소싱,<br>
-        <span class="gl">아는 사람만 쓰는</span><br>
-        진짜 방법 — 알리는 시작일 뿐
+      <div class="wk-card">
+        <div class="wk-date">Week 3 · 5월 23일 (토)</div>
+        <div class="wk-title">
+          국내 리셀만 하면<br>
+          <span class="gl">마진 한계가 온다</span> —<br>
+          해외 소싱으로 30% 마진 만드는 법
+        </div>
+        <div class="wk-teaser">💬 해외 소싱 어렵다고 피하던 분들이 가장 많이 돈 법니다.</div>
       </div>
-      <ul class="tlist">
-        <li>① 해외 베스트셀러를 국내에서 먼저 파는 방법 — 마스터 루트<span class="tag t-new">실습</span></li>
-      </ul>
-    <div class="lock-box">
-      <div class="lock-box-title"><span>🔒</span> 나머지 세부 내용은 12개월 결제자에게만 공개됩니다</div>
-      <div class="lock-row">
-        <div class="lock-num">②</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-hot">핵심</span>
-      </div>
-      <div class="lock-row">
-        <div class="lock-num">③</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-key">독점</span>
-      </div>
-      <div class="lock-row">
-        <div class="lock-num">④</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-hot">실전</span>
-      </div>
-    </div>
-      <div class="wk-teaser">💬 중국 소싱을 포기했던 분들, 이번 주 이후 생각이 바뀝니다.</div>
-    </div>
 
-    <div class="ph-goal">
-      <span>🎯</span>
-      <div><strong>Phase 2 목표:</strong> 국내 리셀 + 해외 소싱 병행 체계 완성 — 마진 30% 구조 설계 완료</div>
+      <div class="wk-card">
+        <div class="wk-date">Week 4 · 5월 30일 (토)</div>
+        <div class="wk-title">
+          해외 구매대행,<br>
+          <span class="gl">아는 사람만 쓰는</span><br>
+          진짜 방법 — 알리는 시작일 뿐
+        </div>
+        <div class="wk-teaser">💬 해외 구매대행을 포기했던 분들, 이번 주 이후 생각이 바뀝니다.</div>
+      </div>
+
     </div>
+    <div class="ph-goal"><span>🎯</span><div><strong>Phase 2 목표:</strong> 국내 리셀 + 해외 소싱 병행 체계 완성 — 마진 30% 구조 설계 완료</div></div>
   </div>
 
-  <!-- PHASE 3 -->
-  <div class="phase" id="phase3">
+  <!-- ══ PHASE 3 ══ -->
+  <div class="phase">
     <div class="phase-head ph3-head">
       <div class="ph-icon ic3">3</div>
       <div class="ph-meta">
-        <div class="ph-sub">Phase 3 · 반대량 등록 & 노출 폭발</div>
+        <div class="ph-sub">Phase 3 · 반대량 등록 &amp; 노출 폭발</div>
         <div class="ph-title">반대량 등록 퀀텀 점프</div>
       </div>
       <div class="ph-wk wk3">5~6주차</div>
     </div>
 
-    <div class="wk-card">
-      <div class="wk-date">Week 5 · 6월 6일 (토)</div>
-      <div class="wk-title">
-        올리는 속도를<br>
-        <span class="tl">10배 높이는 방법</span> —<br>
-        대량 등록, 제대로 하면 다릅니다
-      </div>
-      <ul class="tlist">
-        <li>① 많이 올리면 무조건 팔리나 — 대부분이 모르는 함정이 있습니다<span class="tag t-hot">핵심</span></li>
-      </ul>
-    <div class="lock-box">
-      <div class="lock-box-title"><span>🔒</span> 나머지 세부 내용은 12개월 결제자에게만 공개됩니다</div>
-      <div class="lock-row">
-        <div class="lock-num">②</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-key">독점</span>
-      </div>
-      <div class="lock-row">
-        <div class="lock-num">③</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-hot">실전</span>
-      </div>
-      <div class="lock-row">
-        <div class="lock-num">④</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-new">최초공개</span>
-      </div>
-    </div>
-      <div class="wk-teaser">💬 등록 개수가 문제가 아닙니다 — 방식이 문제입니다.</div>
-    </div>
+    <div class="wk-grid">
 
-    <div class="wk-card">
-      <div class="wk-date">Week 6 · 6월 13일 (토)</div>
-      <div class="wk-title">
-        고객이 3초 안에 사게 만드는<br>
-        <span class="tl">썸네일 & 상세페이지</span> —<br>
-        AI로 10분 만에 완성하는 법
+      <div class="wk-card">
+        <div class="wk-date">Week 5 · 6월 6일 (토)</div>
+        <div class="wk-title">
+          올리는 속도를<br>
+          <span class="tl">10배 높이는 방법</span> —<br>
+          대량 등록, 제대로 하면 다릅니다
+        </div>
+        <div class="wk-teaser">💬 등록 개수가 문제가 아닙니다 — 방식이 문제입니다.</div>
       </div>
-      <ul class="tlist">
-        <li>① 마스터가 직접 쓰는 AI 프롬프트 — 처음으로 공개<span class="tag t-key">독점</span></li>
-      </ul>
-    <div class="lock-box">
-      <div class="lock-box-title"><span>🔒</span> 나머지 세부 내용은 12개월 결제자에게만 공개됩니다</div>
-      <div class="lock-row">
-        <div class="lock-num">②</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-hot">실습</span>
-      </div>
-      <div class="lock-row">
-        <div class="lock-num">③</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-hot">핵심</span>
-      </div>
-      <div class="lock-row">
-        <div class="lock-num">④</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-new">실전</span>
-      </div>
-    </div>
-      <div class="wk-teaser">💬 이 주차 이후 상세 외주 맡기는 분이 없어집니다.</div>
-    </div>
 
-    <div class="ph-goal">
-      <span>🎯</span>
-      <div><strong>Phase 3 목표:</strong> 등록 상품 수 폭발 + 클릭률·전환율 동시 개선 — 매출 가시화 시작</div>
+      <div class="wk-card">
+        <div class="wk-date">Week 6 · 6월 13일 (토)</div>
+        <div class="wk-title">
+          고객이 3초 안에 사게 만드는<br>
+          <span class="tl">썸네일 &amp; 상세페이지</span> —<br>
+          AI로 10분 만에 완성하는 법
+        </div>
+        <div class="wk-teaser">💬 이 주차 이후 상세 외주 맡기는 분이 없어집니다.</div>
+      </div>
+
     </div>
+    <div class="ph-goal"><span>🎯</span><div><strong>Phase 3 목표:</strong> 등록 상품 수 폭발 + 클릭률·전환율 동시 개선 — 매출 가시화 시작</div></div>
   </div>
 
-  <!-- PHASE 4 -->
-  <div class="phase" id="phase4">
+  <!-- ══ PHASE 4 ══ -->
+  <div class="phase">
     <div class="phase-head ph4-head">
       <div class="ph-icon ic4">4</div>
       <div class="ph-meta">
@@ -635,78 +454,36 @@ nav {
       <div class="ph-wk wk4">7~8주차</div>
     </div>
 
-    <div class="wk-card">
-      <div class="wk-date">Week 7 · 6월 20일 (토)</div>
-      <div class="wk-title">
-        열심히 하는데 왜 나만<br>
-        <span class="hl">매출이 안 느나</span> —<br>
-        그 이유, 이번 주에 알게 됩니다
-      </div>
-      <ul class="tlist">
-        <li>① 계정 하나 3천 vs 5개 합해서 3천 — 어느 게 더 쉬운가? 구조 설계의 비밀<span class="tag t-hot">핵심</span></li>
-      </ul>
-    <div class="lock-box">
-      <div class="lock-box-title"><span>🔒</span> 나머지 세부 내용은 12개월 결제자에게만 공개됩니다</div>
-      <div class="lock-row">
-        <div class="lock-num">②</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-key">독점</span>
-      </div>
-      <div class="lock-row">
-        <div class="lock-num">③</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-hot">실전</span>
-      </div>
-      <div class="lock-row">
-        <div class="lock-num">④</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-new">최초공개</span>
-      </div>
-    </div>
-      <div class="wk-teaser">💬 이번 주 이후, 매출을 보는 눈이 완전히 달라집니다.</div>
-    </div>
+    <div class="wk-grid">
 
-    <div class="wk-card">
-      <div class="wk-date">Week 8 · 6월 27일 (토)</div>
-      <div class="wk-title">
-        마스터가 8주 동안<br>
-        <span class="hl">보여주지 않은 것</span> —<br>
-        마지막 주에 전부 꺼냅니다
+      <div class="wk-card">
+        <div class="wk-date">Week 7 · 6월 20일 (토)</div>
+        <div class="wk-title">
+          열심히 하는데 왜 나만<br>
+          <span class="hl">매출이 안 느나</span> —<br>
+          그 이유, 이번 주에 알게 됩니다
+        </div>
+        <div class="wk-teaser">💬 이번 주 이후, 매출을 보는 눈이 완전히 달라집니다.</div>
       </div>
-      <ul class="tlist">
-        <li>① 일반 셀러와 월 3천 셀러의 결정적 차이 — 딱 하나입니다<span class="tag t-hot">독점</span></li>
-      </ul>
-    <div class="lock-box">
-      <div class="lock-box-title"><span>🔒</span> 나머지 세부 내용은 12개월 결제자에게만 공개됩니다</div>
-      <div class="lock-row">
-        <div class="lock-num">②</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-key">최초공개</span>
-      </div>
-      <div class="lock-row">
-        <div class="lock-num">③</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-hot">핵심</span>
-      </div>
-      <div class="lock-row">
-        <div class="lock-num">④</div>
-        <span class="lock-text">세부 내용은 12개월 결제자에게만 공개됩니다</span>
-        <span class="tag t-new">코칭</span>
-      </div>
-    </div>
-      <div class="wk-teaser">💬 8주 후, 이 커리큘럼이 왜 12개월 결제자에게만 공개됐는지 알게 됩니다.</div>
-    </div>
 
-    <div class="ph-goal">
-      <span>🏆</span>
-      <div><strong>Phase 4 목표:</strong> 월 매출 3천 달성 구조 완성 + 자동화 운영 시스템 구축</div>
+      <div class="wk-card">
+        <div class="wk-date">Week 8 · 6월 27일 (토)</div>
+        <div class="wk-title">
+          마스터가 8주 동안<br>
+          <span class="hl">보여주지 않은 것</span> —<br>
+          마지막 주에 전부 꺼냅니다
+        </div>
+        <div class="wk-teaser">💬 8주 후, 이 커리큘럼이 왜 12개월 결제자에게만 공개됐는지 알게 됩니다.</div>
+      </div>
+
     </div>
+    <div class="ph-goal"><span>🏆</span><div><strong>Phase 4 목표:</strong> 월 매출 3천 달성 구조 완성 + 자동화 운영 시스템 구축</div></div>
   </div>
 
   <div class="div"></div>
 
-  <!-- CTA -->
-  <div class="cta" id="cta">
+  <!-- ─── BOTTOM CTA ─── -->
+  <div class="cta">
     <h2>이 강의,<br><em>4월에 12개월 결제한 분</em>만<br>들을 수 있습니다</h2>
     <p>
       커리큘럼을 보셨다면 아실 겁니다.<br>
@@ -717,7 +494,7 @@ nav {
     <div class="cta-chips">
       <div class="cta-chip">📅 5월 9일 개강</div>
       <div class="cta-chip">🗓 매주 토요일 9시</div>
-      <div class="cta-chip">📹 라이브 후 2주 다시보기</div>
+      <div class="cta-chip">📹 녹화본 한달 시청 제공</div>
       <div class="cta-chip">🔒 12개월 결제자 전용</div>
     </div>
     <div class="cta-box">
